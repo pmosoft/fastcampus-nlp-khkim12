@@ -1,5 +1,6 @@
 import sys
-sys.path.insert(0,'D:/lge/pycharm-projects/fastcampus-nlp-khkim12/03-preprocessing/18-torchtext/')
+
+sys.path.insert(0, 'D:/lge/pycharm-projects/fastcampus-nlp-khkim12/03-preprocessing/18-torchtext/')
 # %%
 from data_loader import DataLoader
 

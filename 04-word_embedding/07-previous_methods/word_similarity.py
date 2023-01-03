@@ -7,7 +7,7 @@ from collections import defaultdict
 # %% md
 ## Read text
 # %%
-with open('d:/lge/pycharm-projects/fastcampus-nlp-khkim12/04-word_embedding/07-previous_methods/review.sorted.uniq.refined.tsv.text.tok') as f:
+with open('review.sorted.uniq.refined.tsv.text.tok', encoding='utf-8') as f:
     lines = [l.strip() for l in f.read().splitlines() if l.strip()]
 
 # %%
