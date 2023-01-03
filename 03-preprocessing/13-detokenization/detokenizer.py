@@ -14,12 +14,19 @@ def detokenization(line):
 
 
 if __name__ == "__main__":
-    for line in sys.stdin:
+    # python. / detokenizer.py <./ review.sorted.uniq.refined.tok.bpe.tsv > review.sorted.uniq.refined.tok.bpe.detok.tsv
+
+    fr = open('review.sorted.uniq.refined.tok.bpe.tsv', "r", encoding='utf-8')
+    fw = open('review.sorted.uniq.refined.tok.bpe.detok.tsv', "w", encoding='utf-8')
+    # for line in sys.stdin:
+    for line in fr:
         if line.strip() != "":
             buf = []
             for token in line.strip().split('\t'):
                 buf += [detokenization(token)]
 
-            sys.stdout.write('\t'.join(buf) + '\n')
+            # sys.stdout.write('\t'.join(buf) + '\n')
+            fw.write('\t'.join(buf) + '\n')
         else:
-            sys.stdout.write('\n')
+            # sys.stdout.write('\n')
+            fw.write('\n')
