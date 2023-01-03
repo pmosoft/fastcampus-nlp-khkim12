@@ -7,7 +7,7 @@ from data_loader import DataLoader
 ## Load TSV data
 # %%
 loaders = DataLoader(
-    train_fn='D:/lge/pycharm-projects/fastcampus-nlp-khkim12/03-preprocessing/18-torchtext/review.sorted.uniq.refined.tok.shuf.train.tsv',
+    train_fn='review.sorted.uniq.refined.tok.shuf.train.tsv',
     batch_size=256,
     valid_ratio=.2,
     device=-1,
