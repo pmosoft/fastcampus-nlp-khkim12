@@ -31,21 +31,27 @@ if __name__ == "__main__":
 
     regexs = read_regex(fn)
 
-    fr = open("d:/lge/pycharm-projects/fastcampus-nlp-khkim12/03-preprocessing/05-regex/refine.regex.txt","r", encoding='utf-8')
-    fw = open("d:/lge/pycharm-projects/fastcampus-nlp-khkim12/03-preprocessing/05-regex/review.sorted.uniq.tsv","w", encoding='utf-8')
+    fr = open("review.sorted.uniq.tsv","r", encoding='utf-8')
+    fw = open("review.sorted.uniq.refined.tsv","w", encoding='utf-8')
 
     #for line in sys.stdin:
     for line in fr:
-        if line.strip() != "":
-            columns = line.strip().split('\t')
-
-            for r in regexs:
-                columns[target_index] = re.sub(r'%s' % r[0], r[1], columns[target_index].strip())
-
-            #sys.stdout.write('\t'.join(columns) + "\n")
-            fw.write('\t'.join(columns) + "\n")
-        else:
-            #sys.stdout.write('\n')
-            fw.write('\n')
-
+        try:
+            if line.strip() != "":
+                columns = line.strip().split('\t')
+                if len(columns) == 2 :
+                    for r in regexs:
+                        try:
+                            columns[target_index] = re.sub(r'%s' % r[0], r[1], columns[target_index].strip())
+                        except Exception as e:
+                            print(e)
+                            print(columns)
+                    #sys.stdout.write('\t'.join(columns) + "\n")
+                    fw.write('\t'.join(columns) + "\n")
+            else:
+                #sys.stdout.write('\n')
+                fw.write('\n')
+        except Exception as e:
+            print(e)
+            print(line)
     fw.close()

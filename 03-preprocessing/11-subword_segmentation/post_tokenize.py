@@ -3,13 +3,14 @@ import sys
 STR = '▁'
 
 if __name__ == "__main__":
-    ref_fn = sys.argv[1]
-
-    f = open(ref_fn, 'r')
-
-    for ref in f:
+    #ref_fn = sys.argv[1]
+    #f = open(ref_fn, 'r')
+    fr1 = open("review.sorted.uniq.refined.tsv.text","r", encoding='utf-8')
+    fr2 = open("review.sorted.uniq.refined.tsv.text.tok","r", encoding='utf-8')
+    fw = open("review.sorted.uniq.refined.tsv.text.tok2","w", encoding='utf-8')
+    for ref in fr1:
         ref_tokens = ref.strip().split(' ')
-        input_line = sys.stdin.readline().strip()
+        input_line = fr2.readline().strip()
 
         if input_line != "":
             tokens = input_line.split(' ')
@@ -35,8 +36,10 @@ if __name__ == "__main__":
                 if len(tmp_buf) > 0:
                     buf += [STR + tmp_buf[0].strip()] + tmp_buf[1:]
 
-            sys.stdout.write(' '.join(buf) + '\n')
+            #sys.stdout.write(' '.join(buf) + '\n')
+            fw.write(' '.join(buf) + '\n')
         else:
-            sys.stdout.write('\n')
+            #sys.stdout.write('\n')
+            fw.write('\n')
 
-    f.close()
+    fr1.close()

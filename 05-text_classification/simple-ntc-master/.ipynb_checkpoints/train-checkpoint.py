@@ -134,14 +134,48 @@ def main(config):
 
 if __name__ == '__main__':
     #config = define_argparser()
+
+    # p.add_argument('--model_fn', required=True)
+    # p.add_argument('--train_fn', required=True)
+    #
+    # p.add_argument('--gpu_id', type=int, default=-1)
+    # p.add_argument('--verbose', type=int, default=2)
+    #
+    # p.add_argument('--min_vocab_freq', type=int, default=5)
+    # p.add_argument('--max_vocab_size', type=int, default=999999)
+    #
+    # p.add_argument('--batch_size', type=int, default=256)
+    # p.add_argument('--n_epochs', type=int, default=10)
+    #
+    # p.add_argument('--word_vec_size', type=int, default=256)
+    # p.add_argument('--dropout', type=float, default=.3)
+    #
+    # p.add_argument('--max_length', type=int, default=256)
+    #
+    # p.add_argument('--rnn', action='store_true')
+    # p.add_argument('--hidden_size', type=int, default=512)
+    # p.add_argument('--n_layers', type=int, default=4)
+    #
+    # p.add_argument('--cnn', action='store_true')
+    # p.add_argument('--use_batch_norm', action='store_true')
+    # p.add_argument('--window_sizes', type=int, nargs='*', default=[3, 4, 5])
+    # p.add_argument('--n_filters', type=int, nargs='*', default=[100, 100, 100])
+
     from argparse import Namespace
     config = {
-          'model_fn'  : './models/model.pth'
-        , 'train'     : './data/corpus.train.txt'
-        , 'valid'     : './data/corpus.valid.txt'
-        , 'rnn'       : True
-        , 'cnn'       : True
-        , 'gpu_id'    : -1
+          'model_fn'      : 'models/review.pth'
+        , 'train_fn'      : 'data/review.sorted.uniq.refined.tok.shuf.train.tsv'
+        , 'gpu_id'        : -1
+        , 'batch_size'    : 128
+        , 'n_epochs'      : 10
+        , 'word_vec_size' : 256
+        , 'dropout'       : .3
+        , 'rnn'           : True
+        , 'hidden_size'   : 512
+        , 'n_layers'      : 4
+        , 'cnn'           : True
+        , 'window_sizes'  : [3, 4, 5, 6, 7, 8]
+        , 'n_filters'     : 128
     }
     config = Namespace(**config)
     print(config)

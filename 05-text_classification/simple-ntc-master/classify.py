@@ -3,6 +3,8 @@ import argparse
 
 import torch
 import torch.nn as nn
+import torchtext
+
 version = list(map(int, torchtext.__version__.split('.')))
 if version[0] <= 0 and version[1] < 9:
     from torchtext import data
@@ -33,13 +35,15 @@ def define_argparser():
     return config
 
 
-def read_text(max_length=256):
+def read_text(config, max_length=256):
     '''
     Read text from standard input for inference.
     '''
     lines = []
 
-    for line in sys.stdin:
+    fr = open(config.test_fn,"r", encoding='utf-8')
+    #for line in sys.stdin:
+    for line in fr:
         if line.strip() != '':
             lines += [line.strip().split(' ')[:max_length]]
 
@@ -84,7 +88,8 @@ def main(config):
     text_field.vocab = vocab
     label_field.vocab = classes
 
-    lines = read_text(max_length=config.max_length)
+    #lines = read_text(max_length=config.max_length)
+    lines = read_text(config, max_length=config.max_length)
 
     with torch.no_grad():
         ensemble = []
@@ -154,5 +159,31 @@ def main(config):
 
 
 if __name__ == '__main__':
-    config = define_argparser()
+    # config = define_argparser()
+
+    from argparse import Namespace
+
+    # head ./data/review.sorted.uniq.refined.tok.shuf.test.tsv | awk -F'\t' '{ print $2 }' | python classify.py --model ./models/model.pth --gpu_id -1 --top_k 1
+
+    # p.add_argument('--model_fn', required=True)
+    # p.add_argument('--gpu_id', type=int, default=-1)
+    # p.add_argument('--batch_size', type=int, default=256)
+    # p.add_argument('--top_k', type=int, default=1)
+    # p.add_argument('--max_length', type=int, default=256)
+    #
+    # p.add_argument('--drop_rnn', action='store_true')
+    # p.add_argument('--drop_cnn', action='store_true')
+
+    config = {
+          'model_fn'   : 'models/review.pth'
+        , 'test_fn'    : 'data/review.sorted.uniq.refined.tok.shuf.test.text.sample'
+        , 'gpu_id'     : -1
+        , 'batch_size' : 256
+        , 'top_k'      : 1
+        , 'max_length' : 256
+        , 'drop_rnn'   : False
+        , 'drop_cnn'   : False
+    }
+    config = Namespace(**config)
+    print(config)
     main(config)

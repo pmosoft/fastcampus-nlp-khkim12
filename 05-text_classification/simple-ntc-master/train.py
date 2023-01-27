@@ -134,14 +134,27 @@ def main(config):
 
 if __name__ == '__main__':
     #config = define_argparser()
+
     from argparse import Namespace
     config = {
-          'model_fn'  : './models/model.pth'
-        , 'train'     : './data/corpus.train.txt'
-        , 'valid'     : './data/corpus.valid.txt'
-        , 'rnn'       : True
-        , 'cnn'       : True
-        , 'gpu_id'    : -1
+          'model_fn'       : 'models/review.pth'
+        , 'train_fn'       : 'data/review.sorted.uniq.refined.tok.shuf.train.tsv'
+        , 'gpu_id'         : -1
+        , 'verbose'        : 2
+        , 'min_vocab_freq' : 5
+        , 'max_vocab_size' : 999999
+        , 'batch_size'     : 128
+        , 'n_epochs'       : 10
+        , 'word_vec_size'  : 256
+        , 'dropout'        : .3
+        , 'max_length'     : 256
+        , 'rnn'            : False
+        , 'hidden_size'    : 512
+        , 'n_layers'       : 4
+        , 'cnn'            : True
+        , 'use_batch_norm' : True
+        , 'window_sizes'   : [3, 4, 5, 6, 7, 8]
+        , 'n_filters'      : [128, 128, 128, 128, 128, 128]
     }
     config = Namespace(**config)
     print(config)
