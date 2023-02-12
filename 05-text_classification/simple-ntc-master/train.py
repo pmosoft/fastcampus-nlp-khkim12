@@ -148,10 +148,10 @@ if __name__ == '__main__':
         , 'word_vec_size'  : 256
         , 'dropout'        : .3
         , 'max_length'     : 256
-        , 'rnn'            : False
+        , 'rnn'            : True
         , 'hidden_size'    : 512
         , 'n_layers'       : 4
-        , 'cnn'            : True
+        , 'cnn'            : False
         , 'use_batch_norm' : True
         , 'window_sizes'   : [3, 4, 5, 6, 7, 8]
         , 'n_filters'      : [128, 128, 128, 128, 128, 128]

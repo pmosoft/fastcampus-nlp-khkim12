@@ -22,6 +22,7 @@ class RNNClassifier(nn.Module):
         super().__init__()
 
         self.emb = nn.Embedding(input_size, word_vec_size)
+        print('self.emb.weight init=', self.emb.weight)
         self.rnn = nn.LSTM(
             input_size=word_vec_size,
             hidden_size=hidden_size,
